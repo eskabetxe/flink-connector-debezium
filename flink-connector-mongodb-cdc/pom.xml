@@ -21,7 +21,7 @@ limitations under the License.
     <parent>
         <artifactId>flink-cdc-source-connectors</artifactId>
         <groupId>org.apache.flink</groupId>
-        <version>${revision}</version>
+        <version>${revision}-FORK</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -34,7 +34,7 @@ limitations under the License.
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-debezium</artifactId>
-            <version>${project.version}</version>
+            <version>${revision}-FORK</version>
             <exclusions>
                 <exclusion>
                     <artifactId>kafka-log4j-appender</artifactId>
