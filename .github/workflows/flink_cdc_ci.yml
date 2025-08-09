@@ -42,7 +42,7 @@ jobs:
       - name: Set JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '8'
+          java-version: '11'
           distribution: 'temurin'
           cache: 'maven'
       - name: Compiling jar packages
@@ -53,11 +53,11 @@ jobs:
     name: Common Unit Tests
     uses: ./.github/workflows/flink_cdc_base.yml
     with:
-      java-versions: "[8]"
+      java-versions: "[11]"
       modules: "['core']"
   source-ut:
     name: Source Unit Tests
     uses: ./.github/workflows/flink_cdc_base.yml
     with:
-      java-versions: "[8]"
+      java-versions: "[11]"
       modules: "['mysql-source', 'postgres-source', 'oracle', 'mongodb6', 'mongodb7', 'sqlserver', 'tidb', 'oceanbase-source', 'db2', 'vitess']"
