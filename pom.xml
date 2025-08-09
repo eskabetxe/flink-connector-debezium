@@ -29,6 +29,18 @@ limitations under the License.
     <version>${revision}-FORK</version>
     <packaging>pom</packaging>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.debezium</groupId>
+                <artifactId>debezium-bom</artifactId>
+                <version>${debezium.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <modules>
         <module>flink-cdc-base</module>
         <module>flink-connector-db2-cdc</module>
@@ -67,7 +79,7 @@ limitations under the License.
         <!-- dependencies versions -->
         <flink.version>1.20.2</flink.version>
         <flink.major.version>1.20</flink.major.version>
-        <debezium.version>1.9.8.Final</debezium.version>
+        <debezium.version>2.7.4.Final</debezium.version>
         <tikv.version>3.2.0</tikv.version>
         <geometry.version>2.2.0</geometry.version>
         <testcontainers.version>1.18.3</testcontainers.version>
@@ -152,6 +164,12 @@ limitations under the License.
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.2</version>
         </dependency>
     </dependencies>
 

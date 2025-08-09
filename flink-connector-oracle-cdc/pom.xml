@@ -56,7 +56,6 @@ limitations under the License.
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-connector-oracle</artifactId>
-            <version>${debezium.version}</version>
         </dependency>
 
         <!-- test dependencies on Debezium -->
@@ -71,7 +70,6 @@ limitations under the License.
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-core</artifactId>
-            <version>${debezium.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>

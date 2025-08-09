@@ -47,7 +47,6 @@ limitations under the License.
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-connector-mysql</artifactId>
-            <version>${debezium.version}</version>
         </dependency>
 
         <dependency>
@@ -93,7 +92,6 @@ limitations under the License.
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-core</artifactId>
-            <version>${debezium.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>

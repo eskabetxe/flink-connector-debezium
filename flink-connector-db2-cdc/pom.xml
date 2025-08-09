@@ -58,7 +58,6 @@ limitations under the License.
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-connector-db2</artifactId>
-            <version>${debezium.version}</version>
         </dependency>
 
         <!-- Test dependencies -->

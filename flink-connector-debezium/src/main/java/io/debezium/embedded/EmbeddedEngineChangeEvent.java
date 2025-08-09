@@ -9,56 +9,65 @@ package io.debezium.embedded;
 import org.apache.flink.cdc.debezium.internal.DebeziumChangeFetcher;
 
 import io.debezium.engine.ChangeEvent;
+import io.debezium.engine.Header;
 import io.debezium.engine.RecordChangeEvent;
 import org.apache.kafka.connect.source.SourceRecord;
+
+import java.util.List;
 
 /**
  * Copied from Debezium project. Make it public to be accessible from {@link DebeziumChangeFetcher}.
  */
-public class EmbeddedEngineChangeEvent<K, V> implements ChangeEvent<K, V>, RecordChangeEvent<V> {
-
+public class EmbeddedEngineChangeEvent<K, V, H> implements ChangeEvent<K, V>, RecordChangeEvent<V> {
     private final K key;
     private final V value;
+    private final List<Header<H>> headers;
     private final SourceRecord sourceRecord;
 
-    public EmbeddedEngineChangeEvent(K key, V value, SourceRecord sourceRecord) {
+    public EmbeddedEngineChangeEvent(
+            K key, V value, List<Header<H>> headers, SourceRecord sourceRecord) {
         this.key = key;
         this.value = value;
+        this.headers = headers;
         this.sourceRecord = sourceRecord;
     }
 
-    @Override
     public K key() {
-        return key;
+        return this.key;
     }
 
-    @Override
     public V value() {
-        return value;
+        return this.value;
     }
 
-    @Override
+    public List<Header<H>> headers() {
+        return this.headers;
+    }
+
     public V record() {
-        return value;
+        return this.value;
     }
 
-    @Override
     public String destination() {
-        return sourceRecord.topic();
+        return this.sourceRecord.topic();
+    }
+
+    public Integer partition() {
+        return this.sourceRecord.kafkaPartition();
     }
 
     public SourceRecord sourceRecord() {
-        return sourceRecord;
+        return this.sourceRecord;
     }
 
-    @Override
     public String toString() {
+        String var10000 = String.valueOf(this.key);
         return "EmbeddedEngineChangeEvent [key="
-                + key
+                + var10000
                 + ", value="
-                + value
+                + String.valueOf(this.value)
                 + ", sourceRecord="
-                + sourceRecord
+                + String.valueOf(this.sourceRecord)
                 + "]";
     }
 }

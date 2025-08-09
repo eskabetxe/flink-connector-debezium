@@ -132,7 +132,6 @@ limitations under the License.
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-connector-mysql</artifactId>
-            <version>${debezium.version}</version>
             <scope>test</scope>
         </dependency>
 

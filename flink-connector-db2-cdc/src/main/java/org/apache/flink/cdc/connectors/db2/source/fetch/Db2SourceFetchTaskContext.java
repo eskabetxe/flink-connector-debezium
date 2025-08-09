@@ -41,7 +41,6 @@ import io.debezium.connector.db2.Db2OffsetContext;
 import io.debezium.connector.db2.Db2OffsetContext.Loader;
 import io.debezium.connector.db2.Db2Partition;
 import io.debezium.connector.db2.Db2TaskContext;
-import io.debezium.connector.db2.Db2TopicSelector;
 import io.debezium.connector.db2.SourceInfo;
 import io.debezium.data.Envelope.FieldName;
 import io.debezium.pipeline.DataChangeEvent;
@@ -57,7 +56,8 @@ import io.debezium.relational.Table;
 import io.debezium.relational.TableId;
 import io.debezium.relational.Tables.TableFilter;
 import io.debezium.schema.DataCollectionId;
-import io.debezium.schema.TopicSelector;
+import io.debezium.schema.DefaultTopicNamingStrategy;
+import io.debezium.spi.topic.TopicNamingStrategy;
 import io.debezium.util.Collect;
 import io.debezium.util.SchemaNameAdjuster;
 import org.apache.kafka.connect.data.Struct;
@@ -82,7 +82,7 @@ public class Db2SourceFetchTaskContext extends JdbcSourceFetchTaskContext {
     private ErrorHandler errorHandler;
     private ChangeEventQueue<DataChangeEvent> queue;
     private Db2TaskContext taskContext;
-    private TopicSelector<TableId> topicSelector;
+    private TopicNamingStrategy<TableId> topicSelector;
     private EventDispatcher.SnapshotReceiver<Db2Partition> snapshotReceiver;
     private SnapshotChangeEventSourceMetrics<Db2Partition> snapshotChangeEventSourceMetrics;
     private StreamingChangeEventSourceMetrics<Db2Partition> streamingChangeEventSourceMetrics;
@@ -102,7 +102,7 @@ public class Db2SourceFetchTaskContext extends JdbcSourceFetchTaskContext {
     public void configure(SourceSplitBase sourceSplitBase) {
         // initial stateful objects
         final Db2ConnectorConfig connectorConfig = getDbzConnectorConfig();
-        this.topicSelector = Db2TopicSelector.defaultSelector(connectorConfig);
+        this.topicSelector = DefaultTopicNamingStrategy.create(connectorConfig);
         EmbeddedFlinkDatabaseHistory.registerHistory(
                 sourceConfig
                         .getDbzConfiguration()
